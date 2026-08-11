@@ -1,0 +1,30 @@
+import pandas as pd
+
+# Load dataset
+data = pd.read_csv("workload_data.csv")
+
+print("Dataset:\n")
+print(data)
+
+# Initialize hypothesis
+hypothesis = None
+
+print("\nProcessing Training Examples:\n")
+
+for index, row in data.iterrows():
+
+    if row["High-Performance Edge"] == "Yes":
+
+        attributes = row[:-1].tolist()
+
+        if hypothesis is None:
+            hypothesis = attributes
+        else:
+            for i in range(len(hypothesis)):
+                if hypothesis[i] != attributes[i]:
+                    hypothesis[i] = "?"
+
+    print(f"After Row {index+1}: {hypothesis}")
+
+print("\nFinal Hypothesis:")
+print(hypothesis)
